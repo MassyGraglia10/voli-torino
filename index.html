@@ -3,101 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voli Low Cost da Torino (TRN)</title>
+    <title>Solo Voli Diretti da Torino (TRN)</title>
     <style>
-        :root {
-            --primary: #007bff;
-            --secondary: #28a745;
-            --dark: #343a40;
-            --light: #f8f9fa;
-        }
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: var(--light); 
-            color: var(--dark);
-            margin: 0;
-            padding: 20px;
-            text-align: center; 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #f0f2f5; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+            text-align: center;
         }
-        header { margin-bottom: 40px; }
-        h1 { color: var(--primary); margin-bottom: 10px; }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; 
-            max-width: 1000px; 
-            margin: 0 auto; 
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
         }
-        .card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
-            transition: transform 0.2s;
-            border-top: 5px solid var(--primary);
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card.featured { border-top-color: var(--secondary); }
-        .card h3 { margin-top: 0; font-size: 1.5rem; }
-        .price-info { color: #666; font-size: 0.9rem; margin-bottom: 20px; min-height: 40px; }
+        h1 { color: #007bff; font-size: 1.8rem; margin-bottom: 10px; }
+        p { color: #555; margin-bottom: 30px; }
         .btn { 
             text-decoration: none; 
             color: white; 
-            background: var(--primary); 
-            padding: 12px 20px; 
-            border-radius: 8px; 
+            background: #28a745; 
+            padding: 20px; 
+            border-radius: 12px; 
             display: block; 
             font-weight: bold;
-            transition: opacity 0.2s;
+            font-size: 1.2rem;
+            transition: transform 0.2s, background 0.2s;
+            margin-bottom: 15px;
         }
-        .btn:hover { opacity: 0.8; }
-        .btn-green { background: var(--secondary); }
-        footer { margin-top: 50px; font-size: 0.8rem; color: #888; }
+        .btn:hover { background: #218838; transform: scale(1.02); }
+        .btn-google { background: #ea4335; font-size: 1rem; padding: 15px; }
+        .btn-google:hover { background: #d33828; }
+        .badge {
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>✈️ Torino Voli (Andata e Ritorno)</h1>
-        <p>Offerte aggiornate da <strong>Torino Caselle (TRN)</strong></p>
-    </header>
+    <div class="container">
+        <span class="badge">SOLO VOLI DIRETTI</span>
+        <h1>✈️ Torino -> Ovunque</h1>
+        <p>Trova le migliori offerte <strong>Andata e Ritorno</strong> senza scali da Caselle.</p>
 
-    <div class="grid">
-        <div class="card featured">
-            <h3>🌍 Ovunque (A/R)</h3>
-            <p class="price-info">Trova la meta più economica andata e ritorno per i prossimi mesi.</p>
-            <a href="https://www.skyscanner.it/trasporti/voli/trn/?rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false" target="_blank" class="btn btn-green">Cerca il risparmio A/R</a>
-        </div>
+        <a href="https://www.skyscanner.it/trasporti/voli/trn/?rtn=1&preferdirects=true&outboundaltsenabled=false&inboundaltsenabled=false" target="_blank" class="btn">
+            Cerca Offerte A/R Dirette
+        </a>
 
-        <div class="card">
-            <h3>🇪🇸 Barcellona (A/R)</h3>
-            <p class="price-info">Voli diretti per la Spagna. Prezzi andata e ritorno.</p>
-            <a href="https://www.skyscanner.it/trasporti/voli/trn/bcn/?rtn=1" target="_blank" class="btn">Vedi Barcellona A/R</a>
-        </div>
-
-        <div class="card">
-            <h3>🇫🇷 Parigi (A/R)</h3>
-            <p class="price-info">Cerca i voli per Beauvais o Orly con ritorno incluso.</p>
-            <a href="https://www.skyscanner.it/trasporti/voli/trn/pari/?rtn=1" target="_blank" class="btn">Vedi Parigi A/R</a>
-        </div>
-
-        <div class="card">
-            <h3>🇮🇹 Sud Italia (A/R)</h3>
-            <p class="price-info">Catania, Napoli, Bari e altre mete nazionali A/R.</p>
-            <a href="https://www.skyscanner.it/trasporti/voli/trn/it/?rtn=1" target="_blank" class="btn">Vedi Italia A/R</a>
-        </div>
-
-        <div class="card">
-            <h3>📅 Mappa Interattiva</h3>
-            <p class="price-info">Vedi tutti i prezzi A/R sulla mappa di Google.</p>
-            <a href="https://www.google.it/travel/flights/search?tfs=CBwQAhoeagwIAhIIL20vMGZidmpyBwgBEgNUUk4oAHABggELCP___________wFAAUgBmAEB" target="_blank" class="btn" style="background: #ea4335;">Apri Mappa A/R</a>
-        </div>
+        <a href="https://www.google.it/travel/flights/search?tfs=CBwQAhoeagwIAhIIL20vMGZidmpyBwgBEgNUUk4oAHABKAFIAZgBAQ&tfu=EgYIARABGAA" target="_blank" class="btn btn-google">
+            Esplora Mappa Google (A/R)
+        </a>
     </div>
 
-    <footer>
-        <p>Nota: Tutti i link sono impostati per cercare viaggi di Andata e Ritorno.<br>
-        Creato per Torino Caselle • 2026</p>
-    </footer>
+    <p style="margin-top: 20px; font-size: 0.8rem; color: #888;">Aggiornato automaticamente dai motori di ricerca</p>
 
 </body>
 </html>
