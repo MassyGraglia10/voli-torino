@@ -39,7 +39,7 @@
         .card:hover { transform: translateY(-5px); }
         .card.featured { border-top-color: var(--secondary); }
         .card h3 { margin-top: 0; font-size: 1.5rem; }
-        .price-info { color: #666; font-size: 0.9rem; margin-bottom: 20px; }
+        .price-info { color: #666; font-size: 0.9rem; margin-bottom: 20px; min-height: 40px; }
         .btn { 
             text-decoration: none; 
             color: white; 
@@ -58,18 +58,46 @@
 <body>
 
     <header>
-        <h1>✈️ Torino Voli (A/R)</h1>
-        <p>Le migliori offerte andata e ritorno da <strong>Torino Caselle (TRN)</strong></p>
+        <h1>✈️ Torino Voli (Andata e Ritorno)</h1>
+        <p>Offerte aggiornate da <strong>Torino Caselle (TRN)</strong></p>
     </header>
 
     <div class="grid">
         <div class="card featured">
             <h3>🌍 Ovunque (A/R)</h3>
-            <p class="price-info">Trova la meta più economica in assoluto per il mese prossimo.</p>
-            <a href="https://www.skyscanner.it/trasporti/voli/trn/?flexible_days_tic=true&include-unpriced-itineraries=true&sortby=lowest_price" target="_blank" class="btn btn-green">Cerca il risparmio</a>
+            <p class="price-info">Trova la meta più economica andata e ritorno per i prossimi mesi.</p>
+            <a href="https://www.skyscanner.it/trasporti/voli/trn/?rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false" target="_blank" class="btn btn-green">Cerca il risparmio A/R</a>
         </div>
 
         <div class="card">
-            <h3>🇬🇧 Londra (A/R)</h3>
-            <p class="price-info">Ideale per un weekend o shopping. Voli diretti frequenti.</p>
-            <a href="
+            <h3>🇪🇸 Barcellona (A/R)</h3>
+            <p class="price-info">Voli diretti per la Spagna. Prezzi andata e ritorno.</p>
+            <a href="https://www.skyscanner.it/trasporti/voli/trn/bcn/?rtn=1" target="_blank" class="btn">Vedi Barcellona A/R</a>
+        </div>
+
+        <div class="card">
+            <h3>🇫🇷 Parigi (A/R)</h3>
+            <p class="price-info">Cerca i voli per Beauvais o Orly con ritorno incluso.</p>
+            <a href="https://www.skyscanner.it/trasporti/voli/trn/pari/?rtn=1" target="_blank" class="btn">Vedi Parigi A/R</a>
+        </div>
+
+        <div class="card">
+            <h3>🇮🇹 Sud Italia (A/R)</h3>
+            <p class="price-info">Catania, Napoli, Bari e altre mete nazionali A/R.</p>
+            <a href="https://www.skyscanner.it/trasporti/voli/trn/it/?rtn=1" target="_blank" class="btn">Vedi Italia A/R</a>
+        </div>
+
+        <div class="card">
+            <h3>📅 Mappa Interattiva</h3>
+            <p class="price-info">Vedi tutti i prezzi A/R sulla mappa di Google.</p>
+            <a href="https://www.google.it/travel/flights/search?tfs=CBwQAhoeagwIAhIIL20vMGZidmpyBwgBEgNUUk4oAHABggELCP___________wFAAUgBmAEB" target="_blank" class="btn" style="background: #ea4335;">Apri Mappa A/R</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Nota: Tutti i link sono impostati per cercare viaggi di Andata e Ritorno.<br>
+        Creato per Torino Caselle • 2026</p>
+    </footer>
+
+</body>
+</html>
