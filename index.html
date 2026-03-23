@@ -3,73 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solo Voli Diretti da Torino (TRN)</title>
+    <title>Solo Voli Diretti da Torino</title>
     <style>
         body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: #f0f2f5; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background: #fdfdfd; 
             display: flex; 
-            flex-direction: column; 
             align-items: center; 
             justify-content: center; 
             height: 100vh; 
             margin: 0; 
-            text-align: center;
         }
-        .container {
-            background: white;
+        .box {
+            background: #ffffff;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 350px;
+            width: 85%;
+            text-align: center;
+            border: 1px solid #eee;
         }
-        h1 { color: #007bff; font-size: 1.8rem; margin-bottom: 10px; }
-        p { color: #555; margin-bottom: 30px; }
+        h1 { color: #1a73e8; font-size: 1.6rem; margin-bottom: 8px; }
+        .subtitle { color: #5f6368; font-size: 0.9rem; margin-bottom: 30px; line-height: 1.4; }
         .btn { 
             text-decoration: none; 
             color: white; 
-            background: #28a745; 
-            padding: 20px; 
+            background: #1a73e8; 
+            padding: 18px; 
             border-radius: 12px; 
             display: block; 
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: transform 0.2s, background 0.2s;
-            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(26, 115, 232, 0.2);
         }
-        .btn:hover { background: #218838; transform: scale(1.02); }
-        .btn-google { background: #ea4335; font-size: 1rem; padding: 15px; }
-        .btn-google:hover { background: #d33828; }
-        .badge {
-            background: #e1f5fe;
-            color: #0288d1;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .btn:active { transform: scale(0.97); }
+        .tag {
+            background: #e8f0fe;
+            color: #1967d2;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <span class="badge">SOLO VOLI DIRETTI</span>
-        <h1>✈️ Torino -> Ovunque</h1>
-        <p>Trova le migliori offerte <strong>Andata e Ritorno</strong> senza scali da Caselle.</p>
+    <div class="box">
+        <span class="tag">SOLO DIRETTI • A/R</span>
+        <h1>Torino ✈️ Ovunque</h1>
+        <p class="subtitle">Trova le mete più economiche andata e ritorno senza scali da Caselle.</p>
 
-        <a href="https://www.skyscanner.it/trasporti/voli/trn/?rtn=1&preferdirects=true&outboundaltsenabled=false&inboundaltsenabled=false" target="_blank" class="btn">
-            Cerca Offerte A/R Dirette
+        <a href="https://www.google.it/travel/flights/search?tfs=CBwQAhoeagwIAhIIL20vMGZidmpyBwgBEgNUUk4oAHABKAFIAZgBAQ&tfu=EgYIARABGAA" target="_blank" class="btn">
+            Cerca Voli Diretti A/R
         </a>
 
-        <a href="https://www.google.it/travel/flights/search?tfs=CBwQAhoeagwIAhIIL20vMGZidmpyBwgBEgNUUk4oAHABKAFIAZgBAQ&tfu=EgYIARABGAA" target="_blank" class="btn btn-google">
-            Esplora Mappa Google (A/R)
-        </a>
+        <p style="margin-top: 25px; font-size: 0.7rem; color: #999;">
+            Filtri applicati: Solo No-Stop <br>
+            Durata viaggio: 1 settimana (flessibile)
+        </p>
     </div>
-
-    <p style="margin-top: 20px; font-size: 0.8rem; color: #888;">Aggiornato automaticamente dai motori di ricerca</p>
 
 </body>
 </html>
