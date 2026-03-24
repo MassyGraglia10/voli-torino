@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Scanner Voli Torino ✈️</title>
+    <title>Scanner Voli PRO ✈️</title>
     
     <link rel="manifest" href="manifest.json">
-    
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -22,72 +21,122 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .container {
             text-align: center;
             background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
         }
 
-        h1 { color: #00a698; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        p { color: #666; margin-bottom: 30px; }
+        h1 { color: #00a698; margin-bottom: 5px; font-size: 1.8rem; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 0.95rem; }
 
         .btn-skyscanner {
             background-color: #00a698;
             color: white;
             border: none;
-            padding: 20px 30px;
-            font-size: 1.2rem;
+            padding: 25px 20px;
+            font-size: 1.1rem;
             font-weight: bold;
-            border-radius: 12px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 100%;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
             text-decoration: none;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Colore diverso per Malpensa per distinguerlo */
+        .btn-mxp {
+            background-color: #05203c;
         }
 
         .btn-skyscanner:hover {
-            background-color: #008479;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,166,152,0.3);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
-        .icon-plane {
-            font-size: 3rem;
-            transform: rotate(-45deg);
+        .btn-skyscanner i.main-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .text-group {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .text-group span {
+            display: block;
+            font-size: 0.75rem;
+            opacity: 0.9;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-info {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1><i class="fas fa-plane-departure"></i> Torino Voli</h1>
-    <p>Cerca le migliori offerte A/R dirette da Caselle su Skyscanner</p>
+    <h1><i class="fas fa-search-location"></i> Scanner Voli</h1>
+    <p class="subtitle">Trova le migliori offerte dirette A/R</p>
 
-    <button onclick="vaiASkyscanner()" class="btn-skyscanner">
-        <i class="fas fa-plane icon-plane"></i>
-        TROVA TUTTE LE DESTINAZIONI
+    <button onclick="vaiASkyscanner('TRN')" class="btn-skyscanner">
+        <i class="fas fa-plane-departure main-icon"></i>
+        <div class="text-group">
+            <span>Da Torino Caselle</span>
+            TUTTE LE DESTINAZIONI
+        </div>
+        <i class="fas fa-chevron-right"></i>
     </button>
 
-    <div style="margin-top: 25px; font-size: 0.85rem; color: #7f8c8d;">
-        <i class="fas fa-check-circle"></i> Solo voli diretti • Andata e Ritorno
+    <button onclick="vaiASkyscanner('MXP')" class="btn-skyscanner btn-mxp">
+        <i class="fas fa-plane-departure main-icon"></i>
+        <div class="text-group">
+            <span>Da Milano Malpensa</span>
+            TUTTE LE DESTINAZIONI
+        </div>
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div class="footer-info">
+        <i class="fas fa-check-circle"></i> Solo voli diretti • 2 Adulti • Economy
     </div>
 </div>
 
 <script>
-    function vaiASkyscanner() {
-        const url = "https://www.skyscanner.it/trasporti/voli/trn/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1";
+    function vaiASkyscanner(aeroporto) {
+        let url = "";
+        
+        if (aeroporto === 'TRN') {
+            // URL Torino
+            url = "https://www.skyscanner.it/trasporti/voli/trn/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1";
+        } else {
+            // URL Malpensa
+            url = "https://www.skyscanner.it/trasporti/voli/mxp/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1";
+        }
+        
         window.open(url, '_blank');
     }
 </script>
