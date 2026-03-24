@@ -3,79 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Scanner Voli Mensile 2026 ✈️</title>
+    <title>Scanner Voli PRO ✈️</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/984/984233.png">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/984/984233.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        :root { --trn: #00a698; --mxp: #05203c; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
-        .container { background: white; padding: 25px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.1); max-width: 480px; width: 100%; text-align: center; }
-        h1 { color: #333; font-size: 1.4rem; margin-bottom: 20px; }
-        .airport-selector { display: flex; gap: 12px; margin-bottom: 25px; }
-        .air-btn { flex: 1; padding: 15px; border: 2px solid #eee; border-radius: 16px; cursor: pointer; font-weight: 800; transition: 0.3s; background: white; font-size: 0.9rem; }
-        .air-btn.active[data-air="TRN"] { border-color: var(--trn); color: var(--trn); background: #e6f6f5; }
-        .air-btn.active[data-air="MXP"] { border-color: var(--mxp); color: var(--mxp); background: #e6eaef; }
-        .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-        .month-card { 
-            background: #ffffff; border: 1.5px solid #eee; padding: 18px 5px; border-radius: 14px; 
-            cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px;
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
-        .month-card:hover { border-color: var(--trn); background: #f0fdfa; transform: translateY(-3px); }
-        .month-card i { font-size: 1.3rem; color: #00a698; }
-        .month-name { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: #555; }
-        .footer { margin-top: 25px; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 15px; }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        h1 { color: #00a698; margin-bottom: 5px; font-size: 1.8rem; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 0.95rem; }
+
+        .btn-skyscanner {
+            background-color: #00a698;
+            color: white;
+            border: none;
+            padding: 25px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Colore diverso per Malpensa per distinguerlo */
+        .btn-mxp {
+            background-color: #05203c;
+        }
+
+        .btn-skyscanner:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-skyscanner i.main-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .text-group {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .text-group span {
+            display: block;
+            font-size: 0.75rem;
+            opacity: 0.9;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-info {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1><i class="fas fa-search-location"></i> Destinazioni 2026</h1>
-    
-    <div class="airport-selector">
-        <div class="air-btn active" data-air="trn" onclick="setAirport('trn')">TORINO</div>
-        <div class="air-btn" data-air="mxp" onclick="setAirport('mxp')">MALPENSA</div>
-    </div>
+    <h1><i class="fas fa-search-location"></i> Scanner Voli</h1>
+    <p class="subtitle">Trova le migliori offerte dirette A/R</p>
 
-    <div class="month-grid" id="gridMesi"></div>
+    <button onclick="vaiASkyscanner('TRN')" class="btn-skyscanner">
+        <i class="fas fa-plane-departure main-icon"></i>
+        <div class="text-group">
+            <span>Da Torino Caselle</span>
+            TUTTE LE DESTINAZIONI
+        </div>
+        <i class="fas fa-chevron-right"></i>
+    </button>
 
-    <div class="footer">
-        <i class="fas fa-check-circle"></i> Voli Diretti • 2 Adulti • Intero Mese
+    <button onclick="vaiASkyscanner('MXP')" class="btn-skyscanner btn-mxp">
+        <i class="fas fa-plane-departure main-icon"></i>
+        <div class="text-group">
+            <span>Da Milano Malpensa</span>
+            TUTTE LE DESTINAZIONI
+        </div>
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div class="footer-info">
+        <i class="fas fa-check-circle"></i> Solo voli diretti • 2 Adulti • Economy
     </div>
 </div>
 
 <script>
-    let currentAir = 'trn';
-    const mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
-
-    function setAirport(code) {
-        currentAir = code;
-        document.querySelectorAll('.air-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.air-btn[data-air="${code}"]`).classList.add('active');
-    }
-
-    function generaGriglia() {
-        const grid = document.getElementById('gridMesi');
-        mesi.forEach((mese, index) => {
-            const mNum = (index + 1).toString().padStart(2, '0');
-            const card = document.createElement('div');
-            card.className = 'month-card';
-            card.onclick = () => vai(mNum);
-            card.innerHTML = `<i class="fas fa-calendar-day"></i><div class="month-name">${mese}</div>`;
-            grid.appendChild(card);
-        });
-    }
-
-    function vai(m) {
-        // NUOVO URL "FLESSIBILE" PER FORZARE IL MESE
-        // Formato: /trn/anywhere/2026-05/2026-05/
-        const baseUrl = `https://www.skyscanner.it/trasporti/voli/${currentAir}/anywhere/2026-${m}/2026-${m}/`;
+    function vaiASkyscanner(aeroporto) {
+        let url = "";
         
-        // Parametri aggiuntivi per forzare 2 adulti e voli diretti
-        const params = `?adultsv2=2&cabinclass=economy&preferdirects=true&rtn=1`;
+        if (aeroporto === 'TRN') {
+            // URL Torino
+            url = "https://www.skyscanner.it/trasporti/voli/trn/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1";
+        } else {
+            // URL Malpensa
+            url = "https://www.skyscanner.it/trasporti/voli/mxp/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1";
+        }
         
-        window.open(baseUrl + params, '_blank');
+        window.open(url, '_blank');
     }
-
-    generaGriglia();
 </script>
+
 </body>
 </html>
