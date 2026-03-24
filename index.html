@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scanner Voli Torino ✈️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
@@ -25,7 +26,7 @@
             width: 90%;
         }
 
-        h1 { color: #00a698; margin-bottom: 10px; }
+        h1 { color: #00a698; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         p { color: #666; margin-bottom: 30px; }
 
         .btn-skyscanner {
@@ -42,40 +43,40 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             text-decoration: none;
         }
 
         .btn-skyscanner:hover {
             background-color: #008479;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,166,152,0.3);
         }
 
-        .emoji { font-size: 2rem; }
+        .icon-plane {
+            font-size: 3rem;
+            transform: rotate(-45deg); /* Inclinazione per dare dinamismo */
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Torino Voli Diretti</h1>
-    <p>Cerca le migliori offerte A/R da Caselle su Skyscanner</p>
+    <h1><i class="fas fa-plane-departure"></i> Torino Voli</h1>
+    <p>Cerca le migliori offerte A/R dirette da Caselle su Skyscanner</p>
 
     <button onclick="vaiASkyscanner()" class="btn-skyscanner">
-        <span class="emoji">🌍</span>
+        <i class="fas fa-plane icon-plane"></i>
         TROVA TUTTE LE DESTINAZIONI
     </button>
 
-    <div style="margin-top: 20px; font-size: 0.8rem; color: #999;">
-        Solo voli diretti • Andata e Ritorno
+    <div style="margin-top: 25px; font-size: 0.85rem; color: #7f8c8d;">
+        <i class="fas fa-check-circle"></i> Solo voli diretti • Andata e Ritorno
     </div>
 </div>
 
 <script>
     function vaiASkyscanner() {
-        // Link Skyscanner impostato su: 
-        // Partenza: TRN (Torino)
-        // Arrivo: Everywhere (Ovunque)
-        // Filtro: Solo voli diretti (directOnly=true)
         const url = "https://www.skyscanner.it/trasporti/voli/trn/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1";
         window.open(url, '_blank');
     }
