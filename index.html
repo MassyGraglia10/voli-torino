@@ -17,7 +17,7 @@
         
         /* Selezione Aeroporto */
         .airport-selector { display: flex; gap: 10px; margin-bottom: 25px; }
-        .air-btn { flex: 1; padding: 15px; border: 2px solid #eee; border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s; background: white; }
+        .air-btn { flex: 1; padding: 15px; border: 2px solid #eee; border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s; background: white; text-align: center; }
         
         .air-btn.active[data-air="TRN"] { border-color: var(--trn-color); color: var(--trn-color); background: #e6f6f5; }
         .air-btn.active[data-air="MXP"] { border-color: var(--mxp-color); color: var(--mxp-color); background: #e6eaef; }
@@ -28,9 +28,9 @@
             background: #f8f9fa; border: 1px solid #eee; padding: 15px 5px; border-radius: 12px; 
             cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 5px;
         }
-        .month-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); background: white; }
-        .month-card i { font-size: 1.2rem; color: #999; }
-        .month-name { font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+        .month-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); background: white; border-color: #00a698; }
+        .month-card i { font-size: 1.2rem; color: #00a698; }
+        .month-name { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; color: #444; }
 
         .footer { margin-top: 20px; font-size: 0.8rem; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
@@ -53,7 +53,7 @@
         </div>
 
     <div class="footer">
-        <i class="fas fa-info-circle"></i> Ricerca voli diretti A/R per 2 adulti (2026)
+        <i class="fas fa-info-circle"></i> Ricerca voli diretti A/R • 2 Adulti • 2026
     </div>
 </div>
 
@@ -73,12 +73,12 @@
     function generaGriglia() {
         const grid = document.getElementById('gridMesi');
         mesi.forEach((mese, index) => {
-            const mIndex = (index + 1).toString().padStart(2, '0'); // 01, 02...
+            const mIndex = (index + 1).toString().padStart(2, '0');
             const card = document.createElement('div');
             card.className = 'month-card';
             card.onclick = () => vaiASkyscanner(mIndex);
             card.innerHTML = `
-                <i class="far fa-calendar"></i>
+                <i class="far fa-calendar-check"></i>
                 <div class="month-name">${mese}</div>
             `;
             grid.appendChild(card);
@@ -86,9 +86,11 @@
     }
 
     function vaiASkyscanner(meseNum) {
-        // Formato data per Skyscanner: YYMM (es: 2605 per Maggio 2026)
-        const yearMonth = `26${meseNum}`; 
-        const url = `https://www.skyscanner.it/trasporti/voli/${currentAirport.toLowerCase()}/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&outbound_dates=${yearMonth}&inbound_dates=${yearMonth}`;
+        // Formato corretto per la ricerca "Intero Mese": 2026-MM
+        const dateParam = `2026-${meseNum}`; 
+        
+        // URL ricostruito per forzare la ricerca mensile corretta
+        const url = `https://www.skyscanner.it/trasporti/voli/${currentAirport.toLowerCase()}/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&outbound_dates=${dateParam}&inbound_dates=${dateParam}`;
         
         window.open(url, '_blank');
     }
