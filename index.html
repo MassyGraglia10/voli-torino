@@ -10,19 +10,12 @@
     <style>
         :root { --trn-color: #00a698; --mxp-color: #05203c; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
-
         .container { background: white; padding: 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 500px; width: 100%; text-align: center; }
-        
         h1 { color: #333; font-size: 1.5rem; margin-bottom: 20px; }
-        
-        /* Selezione Aeroporto */
         .airport-selector { display: flex; gap: 10px; margin-bottom: 25px; }
         .air-btn { flex: 1; padding: 15px; border: 2px solid #eee; border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s; background: white; text-align: center; }
-        
         .air-btn.active[data-air="TRN"] { border-color: var(--trn-color); color: var(--trn-color); background: #e6f6f5; }
         .air-btn.active[data-air="MXP"] { border-color: var(--mxp-color); color: var(--mxp-color); background: #e6eaef; }
-
-        /* Griglia Mesi */
         .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .month-card { 
             background: #f8f9fa; border: 1px solid #eee; padding: 15px 5px; border-radius: 12px; 
@@ -31,7 +24,6 @@
         .month-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); background: white; border-color: #00a698; }
         .month-card i { font-size: 1.2rem; color: #00a698; }
         .month-name { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; color: #444; }
-
         .footer { margin-top: 20px; font-size: 0.8rem; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
@@ -49,20 +41,16 @@
         </div>
     </div>
 
-    <div class="month-grid" id="gridMesi">
-        </div>
+    <div class="month-grid" id="gridMesi"></div>
 
     <div class="footer">
-        <i class="fas fa-info-circle"></i> Ricerca voli diretti A/R • 2 Adulti • 2026
+        <i class="fas fa-info-circle"></i> Ricerca voli diretti • 2 Adulti • 2026
     </div>
 </div>
 
 <script>
     let currentAirport = 'TRN';
-    const mesi = [
-        "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 
-        "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
-    ];
+    const mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
 
     function setAirport(code) {
         currentAirport = code;
@@ -77,20 +65,17 @@
             const card = document.createElement('div');
             card.className = 'month-card';
             card.onclick = () => vaiASkyscanner(mIndex);
-            card.innerHTML = `
-                <i class="far fa-calendar-check"></i>
-                <div class="month-name">${mese}</div>
-            `;
+            card.innerHTML = `<i class="far fa-calendar-check"></i><div class="month-name">${mese}</div>`;
             grid.appendChild(card);
         });
     }
 
     function vaiASkyscanner(meseNum) {
-        // Formato corretto per la ricerca "Intero Mese": 2026-MM
-        const dateParam = `2026-${meseNum}`; 
+        // NUOVO FORMATO: 26 (anno) + 05 (mese) = 2605
+        const dateShort = `26${meseNum}`; 
         
-        // URL ricostruito per forzare la ricerca mensile corretta
-        const url = `https://www.skyscanner.it/trasporti/voli/${currentAirport.toLowerCase()}/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&outbound_dates=${dateParam}&inbound_dates=${dateParam}`;
+        // Usiamo il parametro 'explore' che è più preciso per le ricerche mensili "Ovunque"
+        const url = `https://www.skyscanner.it/trasporti/voli/${currentAirport.toLowerCase()}/?adultsv2=2&cabinclass=economy&childrenv2=&inboundaltsenabled=false&is_generated=true&outboundaltsenabled=false&preferdirects=true&ref=home&rtn=1&outbound_dates=${dateShort}&inbound_dates=${dateShort}`;
         
         window.open(url, '_blank');
     }
