@@ -3,30 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solo Voli Diretti da Torino</title>
+    <title>Torino Flight Scanner ✈️</title>
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; max-width: 350px; }
-        h1 { color: #1a73e8; margin-bottom: 20px; font-size: 1.5rem; }
-        .btn { 
-            text-decoration: none; color: white; background: #1a73e8; padding: 15px 25px; 
-            border-radius: 10px; display: block; font-weight: bold; font-size: 1.1rem;
+        :root {
+            --primary: #1a73e8;
+            --accent: #f4b400;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #202124;
         }
-        .info { margin-top: 20px; font-size: 0.8rem; color: #666; line-height: 1.4; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        h3 { margin-top: 0; font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        button {
+            padding: 15px 10px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:active { transform: scale(0.95); }
+
+        /* Colori Destinazioni */
+        .btn-ita { background: #e8f5e9; color: #2e7d32; }
+        .btn-eur { background: #e3f2fd; color: #1565c0; }
+        .btn-any { background: #fff3e0; color: #ef6c00; grid-column: span 2; }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        input, select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #70757a;
+            margin-top: 20px;
+        }
+
+        .emoji { font-size: 1.5rem; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>✈️ Torino -> Ovunque</h1>
-        <p style="color:#555">Solo Voli Diretti<br>Andata e Ritorno</p>
-        
-        <a href="https://www.google.it/travel/flights/search?tfs=CBwQAhoeagwIAhIIL20vMGZidmpyBwgBEgNUUk4oAHABKAFIAZgBAQ&tfu=EgYIARABGAA" target="_blank" class="btn">
-            CERCA VOLI DIRETTI
-        </a>
 
-        <div class="info">
-            Il link apre la mappa di Google<br>con i prezzi A/R già filtrati.
+<div class="container">
+    <div class="header">
+        <h1>✈️ Voli da Torino</h1>
+        <p>Solo voli diretti andata/ritorno</p>
+    </div>
+
+    <div class="card">
+        <h3>Destinazioni Preferite</h3>
+        <div class="grid">
+            <button class="btn-ita" onclick="cerca('Bari')">
+                <span class="emoji"> Puglia</span> Bari
+            </button>
+            <button class="btn-ita" onclick="cerca('Cagliari')">
+                <span class="emoji">🏝️</span> Cagliari
+            </button>
+            <button class="btn-eur" onclick="cerca('Barcellona')">
+                <span class="emoji">🇪🇸</span> Barcellona
+            </button>
+            <button class="btn-eur" onclick="cerca('Londra')">
+                <span class="emoji">🇬🇧</span> Londra
+            </button>
+            <button class="btn-eur" onclick="cerca('Parigi')">
+                <span class="emoji">🇫🇷</span> Parigi
+            </button>
+            <button class="btn-eur" onclick="cerca('Bruxelles')">
+                <span class="emoji">🇧🇪</span> Bruxelles
+            </button>
+            <button class="btn-any" onclick="cerca('')" style="background: var(--primary); color: white;">
+                <span class="emoji">🔍</span> Esplora tutte le dirette (Prezzi Bassi)
+            </button>
         </div>
     </div>
+
+    <div class="card">
+        <h3>Ricerca Libera</h3>
+        <div class="input-group">
+            <input type="text" id="destinazioneLibera" placeholder="Dove vuoi andare? (es: Madrid)">
+            <select id="mese">
+                <option value="">Qualsiasi periodo</option>
+                <option value="in May">Maggio</option>
+                <option value="in June">Giugno</option>
+                <option value="in July">Luglio</option>
+                <option value="for 1 week">Prossimi mesi (1 settimana)</option>
+            </select>
+            <button onclick="ricercaManuale()" style="background: var(--accent); color: white; width: 100%;">
+                CERCA ORA
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Creato per Massimo & Liliana <br>
+        <i>I link aprono Google Flights con i filtri "Solo Diretti" e "Da Torino" già attivi.</i>
+    </div>
+</div>
+
+<script>
+    function cerca(destinazione) {
+        // Costruisce la query per Google Flights: Partenza TRN, Solo Diretti, Andata/Ritorno
+        let query = `flights from TRN to ${destinazione} nonstop round trip`;
+        if (destinazione === '') {
+            query = `nonstop flights from TRN round trip`;
+        }
+        const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        window.open(url, '_blank');
+    }
+
+    function ricercaManuale() {
+        const dest = document.getElementById('destinazioneLibera').value;
+        const mese = document.getElementById('mese').value;
+        if(!dest && !mese) {
+            cerca('');
+            return;
+        }
+        let query = `flights from TRN to ${dest} ${mese} nonstop round trip`;
+        const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        window.open(url, '_blank');
+    }
+</script>
+
 </body>
 </html>
